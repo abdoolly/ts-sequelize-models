@@ -14,7 +14,7 @@
     "clean"
   ],
   "author": "ElGenius",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "glob": "^7.1.2",
     "sequelize": "^4.33.2"
@@ -26,9 +26,6 @@
     "type": "",
     "url": "https://github.com/abdoolly/ts-sequelize-models"
   },
-  "licenses": [
-    "MIT"
-  ],
   "bugs": {
     "url": "https://github.com/abdoolly/ts-sequelize-models/issues",
     "email": "abdoolly@gmail.com"
