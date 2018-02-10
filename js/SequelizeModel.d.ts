@@ -1,0 +1,36 @@
+import { Sequelize, DefineAttributes, DataTypes, Model, DefineOptions } from 'sequelize';
+export declare abstract class SequelizeModel {
+    modelName: any;
+    model: any;
+    initializeModel(sequelize: Sequelize, DataTypes: DataTypes): any;
+    abstract getAttributes(DataTypes: DataTypes): DefineAttributes;
+    getOptions(): DefineOptions<any>;
+    getModelName(): any;
+    associate(models: any, currentModel: Model<any, any>): any;
+    private getHooks();
+    private mergeHooks(methodHooks, optionHooks);
+    modelAction(model: Model<any, any>): string;
+    beforeValidate(): any;
+    afterValidate(): any;
+    beforeCreate(): any;
+    afterCreate(): any;
+    beforeDestroy(): any;
+    beforeDelete(): any;
+    afterDestroy(): any;
+    afterDelete(): any;
+    beforeUpdate(): any;
+    afterUpdate(): any;
+    beforeBulkCreate(): any;
+    afterBulkCreate(): any;
+    beforeBulkDestroy(): any;
+    beforeBulkDelete(): any;
+    afterBulkDestroy(): any;
+    afterBulkDelete(): any;
+    beforeBulkUpdate(): any;
+    afterBulkUpdate(): any;
+    beforeFind(): any;
+    beforeFindAfterExpandIncludeAll(): any;
+    beforeFindAfterOptions(): any;
+    afterFind(): any;
+    private notImplemented();
+}

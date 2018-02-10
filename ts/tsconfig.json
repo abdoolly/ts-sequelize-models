@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "declaration": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "sourceMap": true,
+        "outDir": "../js",
+        "lib": [
+            "es2015",
+            "es6",
+        ],
+        "types": [
+            "node"
+        ]
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "ts-sequelize-models",
+  "version": "1.0.0",
+  "description": "This package is meant to improve how sequelize models looks like and make it with typescript",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node js/index.js"
+  },
+  "keywords": [
+    "typescript",
+    "sequelize",
+    "models",
+    "clean"
+  ],
+  "author": "ElGenius",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.2",
+    "sequelize": "^4.33.2"
+  },
+  "devDependencies": {
+    "@types/sequelize": "^4.27.5"
+  },
+  "repository": {
+    "type": "",
+    "url": "https://github.com/abdoolly/ts-sequelize-models"
+  },
+  "licenses": [
+    "MIT"
+  ],
+  "bugs": {
+    "url": "https://github.com/abdoolly/ts-sequelize-models/issues",
+    "email": "abdoolly@gmail.com"
+  }
+}
