@@ -113,6 +113,8 @@ This method is used to return the attributes of your table which will be used du
 |  paramter              |Type                          |Description                         
 |----------------|-------------------------------|-----------------------------|
 |DataTypes|   sequelize.DataTypes | object that holds the sequelize datatypes which is needed in model definition
+
+
 example:
 
 ```
