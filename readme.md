@@ -13,9 +13,9 @@ This package is made to help you initialize sequelize models very easily not onl
 	- [Hooks](#hooks)
 	- [Option paramters in sequelize define](#option-paramters-in-sequelize-define)
 	- [All available functions and properties to override](#all-available-functions-and-properties-to-override)
-- [How to Initialization your models](#how-to-Initialization-your-models)
-	-	[sequelizeInit method details](#sequelizeInit-method-details)
-	-	[sequelizeInit option paramter details](#sequelizeInit-option-paramter-details)
+- [How to initialization your models](#how-to-initialization-your-models)
+	-	[sequelizeInit method details](#sequelizeinit-method-details)
+	-	[sequelizeInit option paramter details](#sequelizeinit-option-paramter-details)
 - [Feedback](#feedback)
 - [Planned features](#planned-features)
 
@@ -267,7 +267,7 @@ getOptions(): DefineOptions<any>{
 
 More Detailed documentation is coming in  a few days which will show all the functions that can be overriden and a full models examples to more illustrate the package.
 
-# How to Initialization your models
+# How to initialization your models
 - First just initalize your sequelize object using your config like that
  ```
  const Sequelize = require('sequelize');
