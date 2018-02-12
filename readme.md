@@ -10,7 +10,7 @@ This package is made to help you initialize sequelize models very easily not onl
 	- [Associations](#associations)
 	- [Hooks](#hooks)
 	- [Option paramters in sequelize define](#option-paramters-in-sequelize-define)
-	- [All Available functions and properties to override](#all-available-functions-to-override)
+	- [All available functions and properties to override](#all-available-functions-and-properties-to-override)
 - [How to Initialization your models](#how-to-Initialization-your-models)
 	-	[sequelizeInit method details](#sequelizeInit-method-details)
 	-	[sequelizeInit option paramter details](#sequelizeInit-option-paramter-details)
