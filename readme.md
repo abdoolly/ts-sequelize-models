@@ -4,26 +4,26 @@ This package is made to help you initialize sequelize models very easily not onl
 
 ## Table of contents
 - [Prerequisite packages](#prerequisite)
-- [Installation](#Installation)
-- [How to make your sequelize models](#How-to-make-your-sequelize-models)
+- [Installation](#installation)
+- [How to make your sequelize models](#how-to-make-your-sequelize-models)
 	- [Basic usage](#basic-usage)
-	- [Associations](#Associations)
-	- [Hooks](#Hooks)
-	- [Option paramters in sequelize define](#Option-paramters-in-sequelize-define)
-	- [All Available functions and properties to override](#All-Available-functions-to-override)
-- [How to Initialization your models](#How-to-Initialization-your-models)
+	- [Associations](#associations)
+	- [Hooks](#hooks)
+	- [Option paramters in sequelize define](#option-paramters-in-sequelize-define)
+	- [All Available functions and properties to override](#all-available-functions-to-override)
+- [How to Initialization your models](#how-to-Initialization-your-models)
 	-	[sequelizeInit method details](#sequelizeInit-method-details)
 	-	[sequelizeInit option paramter details](#sequelizeInit-option-paramter-details)
-- [Feedback](#Feedback)
-- [Planned features](#Planned-features)
+- [Feedback](#feedback)
+- [Planned features](#planned-features)
 
-**prerequisite**
+## Prerequisite
 - Before installing you will need to install of course sequelize using 
 `npm i sequelize`
 - you will also need to install sequelize type declarations using this command
 `npm i @types/sequelize`
 
-**Installation**
+## Installation
 
 - Now to install this package just type
 
@@ -101,7 +101,7 @@ return hashPassword(user.password).then(hashedPw => {
 
 **Hint :** you now don't need to go to the sequelize docs to know what hook functions are available. All hooks are just available when you press your auto complete keys cause this the beauty of typescript.
 
-## All Available functions and properties to override
+## All available functions and properties to override
 
 ### modelName
 This is a property in which if you wanted the model name to be with a certain name different than your class name just override it and set its value to what you want.
