@@ -3,6 +3,7 @@
 This package is made to help you initialize sequelize models very easily not only that but , also it will help you make a very neat and good looking sequelize models using typescript.
 
 [![npm version](https://badge.fury.io/js/ts-sequelize-models.svg)](https://badge.fury.io/js/ts-sequelize-models)
+[![Dependency Status](https://david-dm.org/abdoolly/ts-sequelize-models.svg)](https://david-dm.org/abdoolly/ts-sequelize-models.svg)
 
 ## Table of contents
 - [Prerequisite packages](#prerequisite)
