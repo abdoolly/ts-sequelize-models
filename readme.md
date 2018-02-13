@@ -87,9 +87,12 @@ sequelize.define('User', {
 - just as easy as overriding a function and return a callback from it like that
 ```
 beforeCreate() {
+    return (user: any, options: any) => {
+        
         return hashPassword(user.password).then(hashedPw => {
             user.password = hashedPw;
         });
+    }
  }
 ```
 The above function will exactly do when you do that code using the normal sequelize models
