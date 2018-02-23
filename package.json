@@ -17,10 +17,10 @@
   "license": "ISC",
   "dependencies": {
     "glob": "^7.1.2",
-    "sequelize": "^4.33.2"
+    "sequelize": "^4.33.4"
   },
   "devDependencies": {
-    "@types/sequelize": "^4.27.5"
+    "@types/sequelize": "^4.27.7"
   },
   "types": "./js/main.d.ts",
   "repository": {
