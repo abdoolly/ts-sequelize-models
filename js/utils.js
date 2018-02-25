@@ -7,6 +7,9 @@ var Utils = (function () {
         var splitter = modelPath.split('/');
         return (splitter[splitter.length - 1]);
     };
+    Utils.prototype.isClosure = function (method) {
+        return typeof method === 'function';
+    };
     return Utils;
 }());
 exports.Utils = Utils;

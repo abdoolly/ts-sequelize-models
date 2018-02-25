@@ -1,4 +1,5 @@
 import { Sequelize, DefineAttributes, DataTypes, Model, DefineOptions } from 'sequelize';
+import { Utils } from './utils';
 
 export abstract class SequelizeModel {
 
@@ -26,6 +27,11 @@ export abstract class SequelizeModel {
     /**
      * private paramters
      */
+    private utils: Utils;
+
+    constructor() {
+        this.utils = new Utils();
+    }
 
     initializeModel(sequelize: Sequelize, DataTypes: DataTypes) {
         let options = this.getOptions();
@@ -89,8 +95,14 @@ export abstract class SequelizeModel {
         let implementedHooks = methods.filter(method => {
 
             let filterStatus = (method.indexOf('before') != -1 || method.indexOf('after') != -1) && (typeof this[method]() !== 'string')
-            if (filterStatus)
-                hooksObject[method] = this[method]();
+            if (filterStatus) {
+                let hookClosure = this[method]();
+
+                if (!this.utils.isClosure(hookClosure))
+                    throw Error(`Hook ${method} does not return a closure, Please make sure you return the hook closure`);
+
+                hooksObject[method] = hookClosure;
+            }
 
             return filterStatus;
         });

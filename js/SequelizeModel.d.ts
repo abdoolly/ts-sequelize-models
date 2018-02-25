@@ -2,6 +2,8 @@ import { Sequelize, DefineAttributes, DataTypes, Model, DefineOptions } from 'se
 export declare abstract class SequelizeModel {
     modelName: any;
     model: any;
+    private utils;
+    constructor();
     initializeModel(sequelize: Sequelize, DataTypes: DataTypes): any;
     abstract getAttributes(DataTypes: DataTypes): DefineAttributes;
     getOptions(): DefineOptions<any>;

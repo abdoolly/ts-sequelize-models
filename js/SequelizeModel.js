@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var utils_1 = require("./utils");
 var SequelizeModel = (function () {
     function SequelizeModel() {
         this.modelName = null;
         this.model = null;
+        this.utils = new utils_1.Utils();
     }
     SequelizeModel.prototype.initializeModel = function (sequelize, DataTypes) {
         var options = this.getOptions();
@@ -30,8 +32,12 @@ var SequelizeModel = (function () {
         var hooksObject = {};
         var implementedHooks = methods.filter(function (method) {
             var filterStatus = (method.indexOf('before') != -1 || method.indexOf('after') != -1) && (typeof _this[method]() !== 'string');
-            if (filterStatus)
-                hooksObject[method] = _this[method]();
+            if (filterStatus) {
+                var hookClosure = _this[method]();
+                if (!_this.utils.isClosure(hookClosure))
+                    throw Error("Hook " + method + " does not return a closure, Please make sure you return the hook closure");
+                hooksObject[method] = hookClosure;
+            }
             return filterStatus;
         });
         return hooksObject;
