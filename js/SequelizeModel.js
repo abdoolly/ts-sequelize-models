@@ -35,7 +35,7 @@ var SequelizeModel = (function () {
             if (filterStatus) {
                 var hookClosure = _this[method]();
                 if (!_this.utils.isClosure(hookClosure))
-                    throw Error("Hook " + method + " does not return a closure, Please make sure you return the hook closure");
+                    throw Error("Hook " + method + " in model " + _this.getModelName() + " does not return a closure, Please make sure you return the hook closure");
                 hooksObject[method] = hookClosure;
             }
             return filterStatus;

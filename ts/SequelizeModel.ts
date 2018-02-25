@@ -99,7 +99,7 @@ export abstract class SequelizeModel {
                 let hookClosure = this[method]();
 
                 if (!this.utils.isClosure(hookClosure))
-                    throw Error(`Hook ${method} does not return a closure, Please make sure you return the hook closure`);
+                    throw Error(`Hook ${method} in model ${this.getModelName()} does not return a closure, Please make sure you return the hook closure`);
 
                 hooksObject[method] = hookClosure;
             }
