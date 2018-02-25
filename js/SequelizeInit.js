@@ -82,7 +82,14 @@ var SequelizeInit = (function () {
             modelPath = modelPath.slice(0, modelPath.length - 3);
             var modelClass = require(modelPath);
             var modelName = this.utils.getModelNameFromPath(modelPath);
-            var modelObject = new modelClass[modelName]();
+            var modelObject = void 0;
+            try {
+                modelObject = new modelClass[modelName]();
+            }
+            catch (err) {
+                console.log("Model " + modelName + " has a problem check the below error");
+                throw err;
+            }
             if (!(modelObject instanceof index_1.sequelizeModel))
                 throw Error("class " + modelName + " does not extend sequelizeModel");
             this.modelObjects[modelName] = modelObject;

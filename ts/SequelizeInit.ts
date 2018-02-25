@@ -57,8 +57,14 @@ export class SequelizeInit {
             // getting the model name 
             let modelName = this.utils.getModelNameFromPath(modelPath);
 
-            // making a new object from the class 
-            let modelObject: sequelizeModel = new modelClass[modelName]();
+            let modelObject: sequelizeModel;
+            try {
+                // making a new object from the class 
+                modelObject = new modelClass[modelName]();
+            } catch (err) {
+                console.log(`Model ${modelName} has a problem check the below error`);
+                throw err;
+            }
 
             // checking if the models that is initiated is an instance of the sequelizeModel class
             if (!(modelObject instanceof sequelizeModel))
