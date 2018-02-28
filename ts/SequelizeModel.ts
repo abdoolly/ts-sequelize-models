@@ -136,14 +136,6 @@ export abstract class SequelizeModel {
 
         extendedClosures.forEach((closure: any) => {
 
-            // case closure was a string
-            if (typeof closure === 'string' && this.utils.isClosure(this[closure]))
-                model[closure] = this[closure];
-
-            // case closure was a function
-            if (this.utils.isClosure(closure))
-                model[closure.name] = closure;
-
             // throw error if was not a closure or a string
             if (!this.utils.isClosure(closure) && typeof closure !== 'string')
                 throw Error(`Paramter ${closure} is not a function or a string`);
@@ -151,6 +143,21 @@ export abstract class SequelizeModel {
             // case paramter was a string but it does not exist in class
             if (typeof closure === 'string' && !this.utils.isClosure(this[closure]))
                 throw Error(`Function name ${closure} does not exist in class or is not a function`);
+
+            if (!Array.isArray(closure) && typeof closure === 'object' && !(closure.name) && !(closure.value))
+                throw Error(`Object ${closure} should have properties name and value`);
+
+            // case the item was an object check for property and value
+            if (!Array.isArray(closure) && typeof closure === 'object')
+                model[closure.name] = closure.value;
+
+            // case closure was a string
+            if (typeof closure === 'string' && this.utils.isClosure(this[closure]))
+                model[closure] = this[closure];
+
+            // case closure was a function
+            if (this.utils.isClosure(closure))
+                model[closure.name] = closure;
         });
     }
 

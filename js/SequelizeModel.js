@@ -55,14 +55,18 @@ var SequelizeModel = (function () {
         modelsExtenders = modelsExtenders || [];
         extendedClosures = extendedClosures.concat(modelsExtenders);
         extendedClosures.forEach(function (closure) {
-            if (typeof closure === 'string' && _this.utils.isClosure(_this[closure]))
-                model[closure] = _this[closure];
-            if (_this.utils.isClosure(closure))
-                model[closure.name] = closure;
             if (!_this.utils.isClosure(closure) && typeof closure !== 'string')
                 throw Error("Paramter " + closure + " is not a function or a string");
             if (typeof closure === 'string' && !_this.utils.isClosure(_this[closure]))
                 throw Error("Function name " + closure + " does not exist in class or is not a function");
+            if (!Array.isArray(closure) && typeof closure === 'object' && !(closure.name) && !(closure.value))
+                throw Error("Object " + closure + " should have properties name and value");
+            if (!Array.isArray(closure) && typeof closure === 'object')
+                model[closure.name] = closure.value;
+            if (typeof closure === 'string' && _this.utils.isClosure(_this[closure]))
+                model[closure] = _this[closure];
+            if (_this.utils.isClosure(closure))
+                model[closure.name] = closure;
         });
     };
     SequelizeModel.prototype.mergeHooks = function (methodHooks, optionHooks) {
