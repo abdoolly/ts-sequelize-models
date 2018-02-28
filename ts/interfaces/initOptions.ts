@@ -2,6 +2,7 @@ export interface initOptions {
     exposeGlobal?: boolean;
     sync?: syncOptions | boolean;
     [key: string]: any;
+    extenders?: string[] | Function[];
 }
 
 export interface syncOptions {

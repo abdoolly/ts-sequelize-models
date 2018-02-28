@@ -74,7 +74,7 @@ export class SequelizeInit {
             this.modelObjects[modelName] = modelObject;
 
             // calling the initialize object which defines the model
-            this.models[modelName] = modelObject.initializeModel(this.sequelize, seq.DataTypes);
+            this.models[modelName] = modelObject.initializeModel(this.sequelize, seq.DataTypes, this.options.extenders);
         }
         return this.models;
     }

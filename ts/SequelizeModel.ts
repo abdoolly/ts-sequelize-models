@@ -22,6 +22,10 @@ export abstract class SequelizeModel {
      * parameters that could be overriden
      */
     public modelName = null;
+
+    /**
+     * sequelize model object
+     */
     public model = null;
 
     /**
@@ -33,7 +37,7 @@ export abstract class SequelizeModel {
         this.utils = new Utils();
     }
 
-    initializeModel(sequelize: Sequelize, DataTypes: DataTypes) {
+    initializeModel(sequelize: Sequelize, DataTypes: DataTypes, modelsExtenders?: string[] | Function[]) {
         let options = this.getOptions();
 
         // merging hooks in methods and hooks in options if exists
@@ -45,6 +49,9 @@ export abstract class SequelizeModel {
 
         // do some custom actions if the user want and giving it the model as a paramter
         this.modelAction(this.model);
+
+        // running model extenders
+        this.putExtendsInModel(modelsExtenders);
 
         return this.model;
     }
@@ -110,11 +117,52 @@ export abstract class SequelizeModel {
         return hooksObject;
     }
 
+    private putExtendsInModel(modelsExtenders = []) {
+        let model = this.model;
+        if (!model)
+            throw Error('You cannot extend an unintialized model');
+
+        let extendedClosures: any[] = this.extendModel();
+
+        if (!Array.isArray(extendedClosures))
+            throw Error('extendModel function should return an array of strings or functions');
+
+        // handling if modelsExtenders came with undefined
+        modelsExtenders = modelsExtenders || [];
+
+        // concate the modelsExtenders which are global on all the models 
+        // with the extendModel which is specific for each model
+        extendedClosures = extendedClosures.concat(modelsExtenders);
+
+        extendedClosures.forEach((closure: any) => {
+
+            // case closure was a string
+            if (typeof closure === 'string' && this.utils.isClosure(this[closure]))
+                model[closure] = this[closure];
+
+            // case closure was a function
+            if (this.utils.isClosure(closure))
+                model[closure.name] = closure;
+
+            // throw error if was not a closure or a string
+            if (!this.utils.isClosure(closure) && typeof closure !== 'string')
+                throw Error(`Paramter ${closure} is not a function or a string`);
+
+            // case paramter was a string but it does not exist in class
+            if (typeof closure === 'string' && !this.utils.isClosure(this[closure]))
+                throw Error(`Function name ${closure} does not exist in class or is not a function`);
+        });
+    }
+
     private mergeHooks(methodHooks, optionHooks) {
         if (optionHooks)
             return Object.assign({}, methodHooks, optionHooks);
 
         return methodHooks;
+    }
+
+    public extendModel() {
+        return [];
     }
 
     /**

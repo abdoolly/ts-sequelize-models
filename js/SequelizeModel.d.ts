@@ -4,13 +4,15 @@ export declare abstract class SequelizeModel {
     model: any;
     private utils;
     constructor();
-    initializeModel(sequelize: Sequelize, DataTypes: DataTypes): any;
+    initializeModel(sequelize: Sequelize, DataTypes: DataTypes, modelsExtenders?: string[] | Function[]): any;
     abstract getAttributes(DataTypes: DataTypes): DefineAttributes;
     getOptions(): DefineOptions<any>;
     getModelName(): any;
     associate(models: any, currentModel: Model<any, any>): any;
     private getHooks();
+    private putExtendsInModel(modelsExtenders?);
     private mergeHooks(methodHooks, optionHooks);
+    extendModel(): any[];
     modelAction(model: Model<any, any>): string;
     beforeValidate(): any;
     afterValidate(): any;

@@ -93,7 +93,7 @@ var SequelizeInit = (function () {
             if (!(modelObject instanceof index_1.sequelizeModel))
                 throw Error("class " + modelName + " does not extend sequelizeModel");
             this.modelObjects[modelName] = modelObject;
-            this.models[modelName] = modelObject.initializeModel(this.sequelize, seq.DataTypes);
+            this.models[modelName] = modelObject.initializeModel(this.sequelize, seq.DataTypes, this.options.extenders);
         }
         return this.models;
     };

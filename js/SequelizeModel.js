@@ -7,12 +7,13 @@ var SequelizeModel = (function () {
         this.model = null;
         this.utils = new utils_1.Utils();
     }
-    SequelizeModel.prototype.initializeModel = function (sequelize, DataTypes) {
+    SequelizeModel.prototype.initializeModel = function (sequelize, DataTypes, modelsExtenders) {
         var options = this.getOptions();
         var hooks = this.mergeHooks(this.getHooks(), options.hooks);
         options.hooks = hooks;
         this.model = sequelize.define(this.getModelName(), this.getAttributes(DataTypes), options);
         this.modelAction(this.model);
+        this.putExtendsInModel(modelsExtenders);
         return this.model;
     };
     SequelizeModel.prototype.getOptions = function () {
@@ -42,10 +43,35 @@ var SequelizeModel = (function () {
         });
         return hooksObject;
     };
+    SequelizeModel.prototype.putExtendsInModel = function (modelsExtenders) {
+        var _this = this;
+        if (modelsExtenders === void 0) { modelsExtenders = []; }
+        var model = this.model;
+        if (!model)
+            throw Error('You cannot extend an unintialized model');
+        var extendedClosures = this.extendModel();
+        if (!Array.isArray(extendedClosures))
+            throw Error('extendModel function should return an array of strings or functions');
+        modelsExtenders = modelsExtenders || [];
+        extendedClosures = extendedClosures.concat(modelsExtenders);
+        extendedClosures.forEach(function (closure) {
+            if (typeof closure === 'string' && _this.utils.isClosure(_this[closure]))
+                model[closure] = _this[closure];
+            if (_this.utils.isClosure(closure))
+                model[closure.name] = closure;
+            if (!_this.utils.isClosure(closure) && typeof closure !== 'string')
+                throw Error("Paramter " + closure + " is not a function or a string");
+            if (typeof closure === 'string' && !_this.utils.isClosure(_this[closure]))
+                throw Error("Function name " + closure + " does not exist in class or is not a function");
+        });
+    };
     SequelizeModel.prototype.mergeHooks = function (methodHooks, optionHooks) {
         if (optionHooks)
             return Object.assign({}, methodHooks, optionHooks);
         return methodHooks;
+    };
+    SequelizeModel.prototype.extendModel = function () {
+        return [];
     };
     SequelizeModel.prototype.modelAction = function (model) {
         return this.notImplemented();
