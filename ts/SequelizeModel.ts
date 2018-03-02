@@ -161,6 +161,56 @@ export abstract class SequelizeModel {
         });
     }
 
+    private addAdditionalFunctionsToModel() {
+
+        let model = this.model;
+        if (!model)
+            throw Error('You cannot extend an unintialized model');
+
+        let classMethods = Object.keys(Object.getPrototypeOf(this));
+
+        let ignoredMethods = {
+            mergeHooks: true,
+            extendModel: true,
+            modelAction: true,
+            beforeValidate: true,
+            afterValidate: true,
+            beforeCreate: true,
+            afterCreate: true,
+            beforeDestroy: true,
+            beforeDelete: true,
+            afterDestroy: true,
+            getAttributes: true,
+            getOptions: true,
+            getModelName: true,
+            associate: true,
+            getHooks: true,
+            putExtendsInModel: true,
+            addAdditionalFunctionsToModel: true,
+            afterDelete: true,
+            beforeUpdate: true,
+            afterUpdate: true,
+            beforeBulkCreate: true,
+            afterBulkCreate: true,
+            beforeBulkDestroy: true,
+            beforeBulkDelete: true,
+            afterBulkDestroy: true,
+            afterBulkDelete: true,
+            beforeBulkUpdate: true,
+            afterBulkUpdate: true,
+            beforeFind: true,
+            beforeFindAfterExpandIncludeAll: true,
+            beforeFindAfterOptions: true,
+            afterFind: true,
+            notImplemented: true,
+            initializeModel: true
+        };
+
+        classMethods.forEach(() => {
+
+        });
+    }
+
     private mergeHooks(methodHooks, optionHooks) {
         if (optionHooks)
             return Object.assign({}, methodHooks, optionHooks);
